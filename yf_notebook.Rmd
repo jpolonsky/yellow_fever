@@ -1,0 +1,41 @@
+---
+title: "DRC Yellow Fever Notebook"
+output:
+  pdf_document: default
+  html_notebook: default
+  html_document: default
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+library(dplyr)
+df <- Hmisc::mdb.get('data/YF20082016.mdb') %>% tbl_df
+
+# # % of cases by sex for each province
+# df %>%
+#   count(ProvinceOfresidence, Sex) %>%
+#   mutate(freq = n / sum(n) * 100)
+# 
+# # % of cases by province for each sex
+# df %>%
+#   count(Sex, ProvinceOfresidence) %>%
+#   mutate(freq = n / sum(n) * 100)
+# 
+# # % of all cases by province & sex (total sums to 100)
+# df %>%
+#   count(ProvinceOfresidence, Sex) %>%
+#   ungroup %>%
+#   mutate(freq = n / sum(n) * 100)
+
+df %>%
+  count(ProvinceOfresidence) %>%
+  mutate(freq = n / sum(n) * 100) %>% 
+  knitr::kable()
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file).
