@@ -19,36 +19,27 @@ When you click the **Knit** button a document will be generated that includes bo
 
 ```{r cars}
 library(dplyr)
-df <- Hmisc::mdb.get('data/YF20082016.mdb') %>% tbl_df
+library(ggplot2)
+library(plotly)
+source('code/functions_figures.R')
 
-# # % of cases by sex for each province
-# df %>%
-#   count(ProvinceOfresidence, Sex) %>%
-#   mutate(freq = n / sum(n) * 100)
-# 
-# # % of cases by province for each sex
-# df %>%
-#   count(Sex, ProvinceOfresidence) %>%
-#   mutate(freq = n / sum(n) * 100)
-# 
-# # % of all cases by province & sex (total sums to 100)
-# df %>%
-#   count(ProvinceOfresidence, Sex) %>%
-#   ungroup %>%
-#   mutate(freq = n / sum(n) * 100)
+filename <- dir('data', full.names = TRUE) %>% stringr::str_subset('.mdb')
+df <- Hmisc::mdb.get(filename) %>% tbl_df
 
-df %>%
-  count(ProvinceOfresidence) %>%
-  mutate(freq = n / sum(n) * 100) %>%
-  knitr::kable()
+df_classification_by_province <- 
+  df %>%
+  count(ProvinceOfresidence, FinalClassification) %>%
+  mutate(freq = n / sum(n) * 100)
+
+PlotBar(
+  data = df, xvar = 'ProvinceOfresidence', yvar = 'FinalClassification', 
+  fill = 'FinalClassification', yaxis = '% missing values', colscheme = 'Blues'
+)
+
+PlotlyBar(
+  data = df, xvar = 'ProvinceOfresidence', yvar = 'FinalClassification', 
+  fill = 'FinalClassification', yaxis = '% missing values', colscheme = 'Blues', show_legend = TRUE
+)
+
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
