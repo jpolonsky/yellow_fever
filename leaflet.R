@@ -3,13 +3,13 @@ library(leaflet)
 library(rgdal)
 
 ## Get layer info
-rgdal::ogrListLayers("data/whoworld.topo.json")
-rgdal::ogrInfo("data/whoworld.topo.json", 'detailed_2013')
+rgdal::ogrListLayers("data/map_who.topo.json")
+rgdal::ogrInfo("data/map_who.topo.json", 'detailed_2013')
 
 ## Read in layer of interest
-map_world_base <- rgdal::readOGR("data/whoworld.topo.json", "detailed_2013")
-# map_world_lakes <- rgdal::readOGR("data/whoworld.topo.json", "maskline_detailed_2013")
-map_world_disputed <- rgdal::readOGR("data/whoworld.topo.json", "maskpoly_detailed_2013")
+map_world_base <- rgdal::readOGR("data/map_who.topo.json", "detailed_2013")
+# map_world_lakes <- rgdal::readOGR("data/map_who.topo.json", "maskline_detailed_2013")
+map_world_disputed <- rgdal::readOGR("data/map_who.topo.json", "maskpoly_detailed_2013")
 # map_world_3@data$id <- 1:nrow(map_world_3@data)
 
 map_world_base@data$value <- nrow(map_world_base@data) %>% rnorm(mean = 100, sd = 70) %>% round
@@ -54,7 +54,7 @@ leaflet(map_world) %>%
   ) %>% 
   addPolylines(data = map_world_3, lng = ~coordinates(map_world)[,1], lat = ~coordinates(map_world)[,2])
 
-map_world <- readLines("data/whoworld.topo.json") %>% paste(collapse = "\n")
+map_world <- readLines("data/map_who.topo.json") %>% paste(collapse = "\n")
 
 leaflet() %>%
   addTopoJSON(map_world,
@@ -146,17 +146,3 @@ leaflet(map_world) %>%
   setView(-0.118092, 51.509865, zoom = 3)
 
 
-
-rgdal::ogrListLayers("data/BASEMAPDATA.gdb")
-map_world <- rgdal::readOGR("data/BASEMAPDATA.gdb", "GLOBAL_ADM0")
-# map_world <- rgdal::readOGR("data/BASEMAPDATA.gdb", "AFRO_EMRO_ADM1")
-# map_world <- rgdal::readOGR("data/BASEMAPDATA.gdb", "AFRO_EMRO_ADM2")
-geojsonio::geojson_write(map_world)
-
-leaflet(map_world) %>%
-  addPolygons(
-    stroke = TRUE, weight = 1, color = "#444444",
-    # fillColor = ~pal(gdp_per_pop),
-    # popup = ~popup
-    fillOpacity = 0.5, smoothFactor = 0.5
-  )
