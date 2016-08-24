@@ -43,3 +43,93 @@ PlotlyBar(
 
 ```
 
+```{r}
+library(leaflet)
+# map_drc <- rgdal::readOGR("data/cd-all.geo.json", "OGRGeoJSON")
+# 
+# pal <- colorFactor('Blues', map_drc$woe.name)
+# 
+# leaflet(map_drc) %>% 
+#   # addTiles() %>%
+#   addPolygons(
+#     stroke = FALSE, fillOpacity = 0.5, smoothFactor = 0.5,
+#     color = ~colorFactor("YlOrRd", map_drc$woe.name)(woe.name)
+#     # fillColor = ~pal(name)
+#     # weight = 3
+#   )
+# 
+# map_drc <- readLines("data/cd-all.geo.json") %>% paste(collapse = "\n")
+# leaflet() %>% 
+#   addTiles() %>% 
+#   addGeoJSON(map_drc, weight = 1, color = "#444444", fill = TRUE) %>% 
+#   setView(-0.118092, 51.509865, zoom = 5)
+
+map_drc <- readLines("data/congo.topo.json") %>% paste(collapse = "\n")
+leaflet() %>%
+  addTiles() %>%
+  addTopoJSON(map_drc, weight = 1, color = "#444444", fill = TRUE)
+
+tmp <- jsonlite::fromJSON(map_drc)
+tmp$objects$`Democratic-Republic-of-the-Congo`$geometries$properties$qs_scale
+pal <- colorFactor('YlOrRd', tmp$objects$`Democratic-Republic-of-the-Congo`$geometries$properties$qs_scale)
+popup <- paste0("<b>", tmp$objects$`Democratic-Republic-of-the-Congo`$geometries$properties$qs_scale, "</b>")
+tmp1 <- jsonlite::toJSON(tmp) %>% paste(collapse = "\n")
+
+leaflet() %>%
+  addTiles() %>%
+  addTopoJSON(tmp1, weight = 1, color = "#444444", fill = TRUE)
+
+
+
+
+
+map_world <- readLines("data/whoworld.topo.json") %>% paste(collapse = "\n")
+
+leaflet() %>% 
+  addTopoJSON(map_world, weight = 1, color = "#444444", fill = TRUE) %>% 
+  setView(-0.118092, 51.509865, zoom = 5)
+
+tmp <- jsonlite::fromJSON(map_drc)
+tmp$objects$`Democratic-Republic-of-the-Congo`$geometries$properties$qs_scale
+pal <- colorFactor('YlOrRd', tmp$objects$`Democratic-Republic-of-the-Congo`$geometries$properties$qs_scale)
+popup <- paste0("<b>", tmp$objects$`Democratic-Republic-of-the-Congo`$geometries$properties$qs_scale, "</b>")
+
+
+
+map_world_1 <- readLines("data/world.geo.json") %>% paste(collapse = "\n")
+leaflet() %>% addGeoJSON(map_world_1, weight = 1, color = "#444444", fill = TRUE)
+
+map_world_2 <- rgdal::readOGR("data/world.geo.json", "OGRGeoJSON")
+
+pal <- colorFactor('YlOrRd', map_world_2$region_un)
+popup <- paste0("<b>", map_world_2$name, "</b><br />", map_world_2$pop_est)
+
+leaflet(map_world_2) %>%
+  addPolygons(
+    stroke = T, fillOpacity = 0.5, #color = "#444444",
+    smoothFactor = 0.5, popup = ~popup,
+    color = ~colorFactor("YlOrRd", map_world_2$region_un)(region_un)
+    # color = ~colorFactor("YlOrRd", map_world_2$sovereignt)(sovereignt)
+    # color = ~colorNumeric("YlOrRd", map_world_2$pop_est)(pop_est)
+    # color = ~colorQuantile("YlOrRd", map_world_2$pop_est, n=25)(pop_est)
+  ) %>% 
+  # addTiles() %>%
+  addProviderTiles("Stamen.Watercolor") %>% 
+  addLegend(position = 'bottomleft',
+                    colors = ~unique(pal(sort(region_un))), 
+                    labels = ~unique(sort(region_un)),
+                    title = 'Legend',
+                    na.label = 'No data',
+                    opacity = .5
+          ) 
+
+map_uk <- readLines("data/england.topo.json") %>% paste(collapse = "\n")
+
+leaflet() %>% 
+  addTopoJSON(map_uk, weight = 1, color = "#444444", fill = TRUE) %>% 
+  # addProviderTiles("Stamen.Toner") %>% 
+  addProviderTiles("Stamen.Watercolor") %>% 
+  addTiles() %>%
+  setView(-0.118092, 51.509865, zoom = 5)
+```
+
