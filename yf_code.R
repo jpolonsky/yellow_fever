@@ -31,3 +31,6 @@ PlotBar(
   data = df, xvar = 'Categorisation', yvar = 'FinalClassification', 
   fill = 'FinalClassification', yaxis = '# cases by final classification', colscheme = 'Blues'
 )
+
+df %>% filter(Labid %in% '16FJ2393')
+df %>% filter(IdNumber %in% 'RDC-KIN-LIM-16-086')

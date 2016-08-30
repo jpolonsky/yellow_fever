@@ -1,21 +1,58 @@
+---
+output:
+  tufte::tufte_handout:
+    citation_package: natbib
+    keep_tex: no
+    pandoc_args:
+    - --include-before-body=stylesheets/titlepage.tex
+    - --include-in-header=stylesheets/styles.sty
+  tufte::tufte_book:
+    citation_package: natbib
+    latex_engine: xelatex
+  tufte::tufte_html: default
+---
+
+```{r setup, include=FALSE}
+library(tufte)
+# invalidate cache when the tufte version changes
+knitr::opts_chunk$set(tidy = FALSE, cache.extra = packageVersion('tufte'))
+options(htmltools.dir.version = FALSE)
+```
+
 <!-- ![](figure/logo_who.pdf) -->
 
 <!-- \begin{marginfigure}
 \includegraphics{figure/logo_who.pdf}
 \end{marginfigure} -->
+<!-- \marginnote{Some text} -->
+
+<!-- <span class="marginnote"><img src=figure/logo_who.jpg></span> -->
+<!-- <span class="marginnote"> Some text </span> -->
+
+<!-- ```{marginfigure} -->
+<!-- `![](figure/logo_who.pdf) -->
+<!-- ``` -->
+
+```{r fig.margin = TRUE, echo=FALSE} 
+knitr::include_graphics('figure/logo_who.pdf')
+```
 
 # Yellow Fever outbreak, DRC
 # Report on surveillance & data management
 
+
 ## Overview
 The Yellow Fever outbreak which began in Angola in ... and subsequently spread to border areas within the République démocratique du Congo has, in recent weeks, appeared to have slowed and perhaps even come to an end. This assumption is based on the numbers of samples testing positive by the Institut National de Recherche Biomédicale (INRB).
 
-However, important questions remain as to the reliability of this interpretation of the situation, particularly in view of potential weaknesses and lack of sensitivity of the surveillance system.
+<!-- <span class="newthought">However, important questions</span> -->
+<!-- \newthought{However, important questions}  -->
+
+`r newthought('However, important questions')` remain as to the reliability of this interpretation of the situation, particularly in view of potential weaknesses and lack of sensitivity of the surveillance system.
 
 An overview of important issues to be explored:
 
 - Information flow & sharing
-- meetings timetable (Annex?)
+- meetings timetable (Annex?) `r margin_note('Put this in an annex?')`
 - lack of field staff and supervision/overview of field realities
 
 - requests approved but blocked at IM level
@@ -128,4 +165,5 @@ An overview of important issues to be explored:
 - 2 decision trees
 - Elements of Anita and Philippe's reports
 - Meetings timetable?
+
 
