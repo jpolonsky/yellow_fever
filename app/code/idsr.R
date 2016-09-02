@@ -1,17 +1,19 @@
 library(dplyr)
-library(magrittr)
+# library(magrittr)
 library(tidyr)
-library(lubridate)
+# library(lubridate)
 library(ggplot2)
-library(plotly)
+# library(plotly)
 # source('code/functions_figures.R')
 
-filename <- dir('data', full.names = TRUE) %>% stringr::str_subset('.MDB')
+filename <- dir('app/data', full.names = TRUE) %>% stringr::str_subset('.MDB')
 df <- Hmisc::mdb.get(filename) %>% tbl_df
 # df %>% write.csv(paste0('df_', Sys.Date(), '.csv'))
 glimpse(df)
 
 unique(df$MALADIE)
+
+# df %>% filter(MALADIE %in% c('FIEVRE JAUNE', 'CHOLERA')) %>% write.csv(paste0('df_', Sys.Date(), '.csv'))
 
 df_tmp <- 
   df %>% 
@@ -43,8 +45,7 @@ p <-
   facet_wrap(~ PROV)
 
 p
-ggplotly(p, tooltip = c('fill', 'x', 'y')) %>% 
-  layout(showlegend = FALSE)
+# ggplotly(p, tooltip = c('fill', 'x', 'y')) %>% layout(showlegend = FALSE)
 
 # ggplot(df_tmp2) +
 #   geom_line(aes(x = month, y = n, group = paste0(PROV, MALADIE), colour = MALADIE), stat = 'identity') +
@@ -57,10 +58,18 @@ p <-
   facet_wrap(~ PROV)
 
 p
-ggplotly(p, tooltip = c('group', 'x', 'y')) %>% 
-  layout(showlegend = FALSE)
+# ggplotly(p, tooltip = c('group', 'x', 'y')) %>% layout(showlegend = FALSE)
 
 
 df_tmp2 %>% 
   tidyr::spread(key = month, value = n, fill = 0) %>% 
   knitr::kable()
+
+
+
+df %>% 
+  filter(MALADIE %in% 'FIEVRE JAUNE') %>% 
+  # select(TOTALDECES) %>%
+  select(TOTALCAS) %>%
+  sum(na.rm = T)
+
