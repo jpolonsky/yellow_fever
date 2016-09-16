@@ -29,7 +29,7 @@ An overview of important issues to be explored:
 
 
 ## Analysis of key indicators
-> insert R analyses here...
+> insert R analyses here....
 
 
 ## Data collection and management
