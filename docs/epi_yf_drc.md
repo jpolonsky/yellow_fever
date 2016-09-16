@@ -10,7 +10,7 @@ In addition, there is an ongoing cholera outbreak in Kinshasa and along the bord
 ## Overview
 The overall situation during this two week mission was one in which there had been a decline in the rate of reported suspected YF cases, a large proportion of cases previously classified as confirmed had been reclassified as 'non-cas vaccinale' (i.e. were IgM +ive due to recent vaccination), and mass reactive vaccination campaign (MVC) had begun a day earlier. 
 
-? Most YF staff were deeply involved in the vaccination campaign, with a small number dedicated to working on surveillance
+Owing to the demands of a mass Most YF staff were deeply involved in the vaccination campaign, with a small number dedicated to working on surveillance
 
 
 
