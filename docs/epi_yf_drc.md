@@ -3,7 +3,7 @@
 *Jonathan Polonsky, Epidemiologist, WHO Emergencies Programme*
 
 ## Background
-On 22 March 2016, DRC reported the diagnosis of Yellow Fever (YF) cases in connection with Angola. As of 25 August, 75 cases have been officially notified including 13 autochthonous cases in relation with the current outbreak in 3 provinces Kinshasa, Kongo Central and Kwango. A reactive mass vaccination campaign was launched in the middle of August and is currently ongoing throughout affected areas.
+On 22 March 2016, DRC reported the diagnosis of Yellow Fever (YF) cases in connection with Angola. As of 15 September, 76 cases have been officially notified (including 13 autochthonous cases) in relation to the current outbreak, in four provinces: Kinshasa, Kongo Central, Kwango, and Lualaba. A reactive mass vaccination campaign was launched in the middle of August and is currently ongoing throughout affected areas.
 
 In addition, there is an ongoing cholera outbreak in Kinshasa and along the border with Congo-Brazzaville, and for which there will be a reactive mass vaccination campaign in the coming weeks.
 

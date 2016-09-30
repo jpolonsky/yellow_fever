@@ -42,6 +42,9 @@ ui <- fluidPage(
 ## server ----------------------------------------------------------------------
 server <- function(input, output, session) {
   
+  options(shiny.maxRequestSize = 50*1024^2) # increases upload size to 50MB
+  session$onSessionEnded(stopApp)
+  
   # initial setup
   data_uploaded <- callModule(Upload, 'tmp')
   
